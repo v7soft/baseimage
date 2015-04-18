@@ -3,8 +3,8 @@ set -e
 source /tmp/buildconfig
 set -x
 
-groupadd -g 1100 sfinx
-useradd -g 1100 -u 1100 -s /bin/bash -d /app sfinx
+groupadd -g 1100 appgroup 
+useradd -g 1100 -u 1100 -s /bin/bash -d /app app
 cp -rp /etc/skel /app
 mkdir /app/.ssh
 echo "GSSAPIAuthentication no
@@ -21,5 +21,5 @@ wget https://raw.githubusercontent.com/mkostrikin/mysettings/master/docker_alias
 wget https://raw.githubusercontent.com/mkostrikin/mysettings/master/bashps1.sh -qP /etc/profile.d/
 wget https://raw.githubusercontent.com/mkostrikin/mysettings/master/sqlplus.sh -qP /etc/profile.d/
 wget https://raw.githubusercontent.com/mkostrikin/mysettings/master/.screenrc -qP /app/
-chown -R sfinx:sfinx /app
+chown -R app:appgroup /app
 
