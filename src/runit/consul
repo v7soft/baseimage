@@ -1,0 +1,16 @@
+#!/bin/bash
+
+trap "killall -s INT consul" HUP INT QUIT ABRT KILL ALRM TERM TSTP
+
+CONSUL_DC=${CONSUL_DC:-unset}
+#set dpcker host as a consul server
+[[ -v CONSUL_SERVER ]] || CONSUL_SERVER=$(ip ro | awk '/default/ { print $3 }')
+#run custom consul or regular
+[[ -v CONSUL_OPTS ]] || CONSUL_OPTS="-join ${CONSUL_SERVER}"
+consul agent -config-dir /etc/consul -dc=${CONSUL_DC} ${CONSUL_OPTS} &
+sleep 5
+#try to join them into running cluster
+consul join consul.service.${CONSUL_DC}.cluster
+consul join -wan consul.service.hw.cluster
+
+wait `pidof consul`

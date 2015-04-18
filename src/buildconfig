@@ -1,0 +1,7 @@
+export http_proxy=http://10.20.30.40:3128
+export use_proxy=yes
+export LC_ALL=C
+export DEBIAN_FRONTEND=noninteractive
+minimal_apt_get_install='apt-get install -y --no-install-recommends -o Acquire::ForceIPv4=true'
+
+CONSUL_VERSION=0.5.0
