@@ -1,9 +1,10 @@
-FROM scratch
+FROM v7soft/ubuntu:trusty
+
+ADD src /tmp
 
 MAINTAINER V7Soft <mkostrikin@gmail.com>
+
 ENV HOME /root
-ADD https://github.com/tianon/docker-brew-ubuntu-core/raw/dist/trusty/ubuntu-trusty-core-cloudimg-amd64-root.tar.gz /
-ADD src /tmp
 
 RUN 	chmod -v +x /tmp/*sh && sync && sleep 1 \
 	&& /tmp/prepare.sh \
